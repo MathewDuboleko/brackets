@@ -1,12 +1,13 @@
-module.exports = function check(str, bracketsConfig) {
-  // your solution
-  let strTmp;
-  while (str) {
-    bracketsConfig.forEach(bracketsPair => str = str.replace(bracketsPair.join(''), ''))      
-    if (str === strTmp) {
-       return false;
+module.exports = check
+
+function check(str, bracketsConfig) {
+  const bracketPairs = bracketsConfig.map(pair => pair.join(''))
+  for (let i = 0; i < bracketPairs.length; ) {
+    if (str.includes(bracketPairs[i])) {
+      str = str.replace(bracketPairs[i], '')
+      i = 0
     }
-    strTmp = str;
+    else i++
   }
-  return str.length === 0;
+  return str === ''
 }
